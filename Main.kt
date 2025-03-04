@@ -36,8 +36,55 @@ fun coresValidas(colors: List<String>): Boolean {
     return true
 }
 
-fun calcularResistencia(colors: List<String>, numFaixas: Int): Int {
-    //TODO calcular a resistencia com base nas faixas do resistor.
+fun calcularResistencia(colors: List<String>): String {
+
+    val map1 = mapOf(
+        "PRETO" to 0.0,
+        "MARROM" to 1.0,
+        "VERMELHO" to 2.0,
+        "LARANJA" to 3.0,
+        "AMARELO" to 4.0,
+        "VERDE" to 5.0,
+        "AZUL" to 6.0,
+        "VIOLETA" to 7.0,
+        "CINZA" to 8.0,
+        "BRANCO" to 9.0
+    )
+    val map2 = mapOf(
+        "PRATA" to 0.01,
+        "OURO" to 0.1,
+        "PRETO" to 1.0,
+        "MARROM" to 10.0,
+        "VERMELHO" to 100.0,
+        "LARANJA" to 1000.0,
+        "AMARELO" to 10000.0,
+        "VERDE" to 100000.0,
+        "AZUL" to 1000000.0,
+        "VIOLETA" to 10000000.0
+    )
+    val map3 = mapOf(
+        "PRATA" to "10%",
+        "OURO" to "5%",
+        "MARROM" to "1%",
+        "VERMELHO" to "2%",
+        "VERDE" to "0.5%",
+        "AZUL" to "0.25%",
+        "VIOLETA" to "0.1%",
+        )
+    val map4 = mapOf("MARROM" to "100",
+        "VERMELHO" to "50",
+        "LARANJA" to "15",
+        "AMARELO" to "25")
+
+    if (colors.size == 4) {
+        return "${(map1[colors[0]]!! * 10 + map1[colors[1]]!!) * map2[colors[2]]!!}Ω ${map3[colors[3]]}"
+    }
+    else {
+        if (colors.size == 6) {
+            return "${(map1[colors[0]]!! * 100 + map1[colors[1]]!! * 10 + map1[colors[2]]!!) * map2[colors[3]]!!}Ω ${map3[colors[4]]} ${map4[colors[5]]}ppm"
+        }
+        return "${(map1[colors[0]]!! * 100 + map1[colors[1]]!! * 10 + map1[colors[2]]!!) * map2[colors[3]]!!}Ω ${map3[colors[4]]}"
+    }
 }
 
 fun main() {
@@ -50,6 +97,6 @@ fun main() {
     }
     val colors = getColors(numFaixas)
     println(colors)
-    if (coresValidas(colors))
-
+    if (coresValidas(colors)) println(calcularResistencia(colors))
+    else println("Error.")
 }
