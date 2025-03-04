@@ -52,7 +52,7 @@ fun calcularResistencia(colors: List<String>): String {
     )
     val map2 = mapOf(
         "PRATA" to 0.01,
-        "OURO" to 0.1,
+        "DOURADO" to 0.1,
         "PRETO" to 1.0,
         "MARROM" to 10.0,
         "VERMELHO" to 100.0,
@@ -64,7 +64,7 @@ fun calcularResistencia(colors: List<String>): String {
     )
     val map3 = mapOf(
         "PRATA" to "10%",
-        "OURO" to "5%",
+        "DOURADO" to "5%",
         "MARROM" to "1%",
         "VERMELHO" to "2%",
         "VERDE" to "0.5%",
@@ -89,13 +89,14 @@ fun calcularResistencia(colors: List<String>): String {
 
 fun main() {
     println("\nCalculadora de Resistores\n=========================")
-    print("Insira o número de faixas: ")
-    val numFaixas = readLine()!!.toInt()
-    if (numFaixas != 4 && numFaixas != 5 && numFaixas != 6) {
-        println("Error.")
-        return
-    }
+    var numFaixas: Int
+    do {
+        print("Insira o número de faixas: ")
+        numFaixas = readLine()!!.toInt()
+    } while (numFaixas !in 4..6)
+
     val colors = getColors(numFaixas)
+
     println(colors)
     if (coresValidas(colors)) println(calcularResistencia(colors))
     else println("Error.")
